@@ -10,9 +10,10 @@ public class NativeLibraryManager
     /// </summary>
     /// <param name="assembly">The <see cref="Assembly"/> used by the <see cref="INativeLibrary"/> during initialization</param>
     /// <returns><see cref="INativeLibraryService"/></returns>
-    public static INativeLibraryService RegisterAssembly(Assembly assembly)
+    public static INativeLibraryService RegisterAssembly(Assembly assembly, out bool isCommonLoaded)
     {
-        return new AssemblyLibraryService(assembly);
+        return new AssemblyLibraryService(assembly)
+            .Register(CommonLibrary.Shared, out isCommonLoaded);
     }
 
     /// <summary>
@@ -20,8 +21,11 @@ public class NativeLibraryManager
     /// </summary>
     /// <param name="path">The path used by the <see cref="INativeLibrary"/> during initialization</param>
     /// <returns><see cref="INativeLibraryService"/></returns>
-    public static INativeLibraryService RegisterPath(string path)
+    public static INativeLibraryService RegisterPath(string path, out bool isCommonLoaded)
     {
-        return new PathLibraryService(path);
+        // Always load the common library before
+        // returning the library service interface
+        return new PathLibraryService(path)
+            .Register(CommonLibrary.Shared, out isCommonLoaded);
     }
 }
