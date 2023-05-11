@@ -4,8 +4,12 @@
     <TargetFramework>net7.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
-	<DefineConstants Condition="'$(IncludeNativeLibrariesForSelfExtract)'=='True'">SELF_EXTRACT</DefineConstants>
 	<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
+
+  <ItemGroup>
+  	<EmbeddedResource Include="..\native\build\linux\native_io.so" Link="Lib\native_io.so" Condition="Exists('..\native\build\linux\native_io.so')" />
+  	<EmbeddedResource Include="..\native\build\native_io.dll" Link="Lib\native_io.dll" Condition="Exists('..\native\build\native_io.dll')" />
+  </ItemGroup>
 
 </Project>
