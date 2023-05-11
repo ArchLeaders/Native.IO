@@ -1,7 +1,5 @@
 ﻿using Native.IO.Services;
-using Native.IO.Tests;
 
-NativeLibraryManager.RegisterAssembly(typeof(Program).Assembly)
-    .Register(DummyLib.Shared, out bool dummyLibLoaded);
+NativeLibraryManager.RegisterPath("D:\\Bin\\Somewhere", out bool isCommonLoaded);
 
-Console.WriteLine($"Dummy Lib Loaded: {dummyLibLoaded}");
+Console.WriteLine($"Common Lib Loaded: {isCommonLoaded}");
