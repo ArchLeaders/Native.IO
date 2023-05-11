@@ -4,13 +4,13 @@
 #include <vector>
 
 #if _WIN32
-#define CEAD extern "C" __declspec(dllexport)
+#define EXP extern "C" __declspec(dllexport)
 #else
-#define CEAD extern "C"
+#define EXP extern "C"
 #endif
 
-CEAD void GetVectorHandle(std::vector<std::uint8_t>* vector, std::uint8_t** dst, std::size_t* dst_len);
-CEAD bool FreeVectorHandle(std::vector<std::uint8_t>* vector);
+EXP void GetVectorHandle(std::vector<std::uint8_t>* vector, std::uint8_t** dst, std::size_t* dst_len);
+EXP bool FreeVectorHandle(std::vector<std::uint8_t>* vector);
 
-CEAD void GetStringHandle(std::string* str, const char** dst, std::size_t* dst_len);
-CEAD bool FreeStringHandle(std::string* str);
+EXP void GetStringHandle(std::string* str, const char** dst, std::size_t* dst_len);
+EXP bool FreeStringHandle(std::string* str);
