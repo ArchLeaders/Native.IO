@@ -4,12 +4,13 @@ using System.Runtime.InteropServices;
 namespace Native.IO.Handles;
 
 /// <summary>
-/// Marshals a C++ <b>std::vector&lt;u8&gt;</b> pointer and provides an API to interface it
+/// Marshals a C++ <b>std::vector&lt;u8&gt;</b> pointer and provides an API to
+/// interface it without copying the data
 /// </summary>
 public unsafe partial class DataMarshal : SafeHandleZeroOrMinusOneIsInvalid
 {
     [LibraryImport("native_io")]
-    private static partial void GetVectorHandle(IntPtr vector, out byte* ptr, out int len);
+    private static partial void GetVectorHandle(IntPtr handle, out byte* ptr, out int len);
 
     [LibraryImport("native_io")]
     [return: MarshalAs(UnmanagedType.Bool)]
@@ -23,6 +24,9 @@ public unsafe partial class DataMarshal : SafeHandleZeroOrMinusOneIsInvalid
     public static implicit operator Span<byte>(DataMarshal data) => data.AsSpan();
     public static implicit operator ReadOnlySpan<byte>(DataMarshal data) => data.AsSpan();
 
+    /// <summary>
+    /// Returns a floating span over the unmanaged memory range
+    /// </summary>
     public Span<byte> AsSpan()
     {
         GetVectorHandle(handle, out _ptr, out _len);
@@ -32,7 +36,6 @@ public unsafe partial class DataMarshal : SafeHandleZeroOrMinusOneIsInvalid
     /// <summary>
     /// Creates a managed copy of the unmanaged data pointer
     /// </summary>
-    /// <returns></returns>
     public byte[] ToArray()
     {
         return AsSpan().ToArray();
