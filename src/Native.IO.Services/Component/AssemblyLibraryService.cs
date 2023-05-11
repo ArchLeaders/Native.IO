@@ -13,9 +13,9 @@ internal class AssemblyLibraryService : INativeLibraryService
         _version = assembly.GetName().Version ?? new(1, 0);
     }
 
-    public INativeLibraryService Register(INativeLibrary library)
+    public INativeLibraryService Register(INativeLibrary library, out bool isLoadSuccess)
     {
-        library.Load(_assembly, _version);
+        library.Load(_assembly, _version, out isLoadSuccess);
         return this;
     }
 }

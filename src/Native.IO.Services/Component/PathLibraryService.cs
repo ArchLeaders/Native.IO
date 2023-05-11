@@ -8,9 +8,9 @@ internal class PathLibraryService : INativeLibraryService
         _path = path;
     }
 
-    public INativeLibraryService Register(INativeLibrary library)
+    public INativeLibraryService Register(INativeLibrary library, out bool isLoadSuccess)
     {
-        library.Load(_path);
+        library.Load(_path, out isLoadSuccess);
         return this;
     }
 }
