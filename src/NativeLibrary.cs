@@ -33,7 +33,7 @@ public abstract class NativeLibrary<T> : INativeLibrary where T : INativeLibrary
 
     public virtual void Load(Assembly assembly, Version version, out bool isLoadSuccess)
     {
-        string path = Path.Combine(Path.GetTempPath(), _assemblyName ?? "Default", version.ToString());
+        string path = Path.Combine(Path.GetTempPath(), _assemblyName ?? "Default", assembly.GetName().Name ?? "Default", version.ToString());
         Load(path, out isLoadSuccess);
     }
 
