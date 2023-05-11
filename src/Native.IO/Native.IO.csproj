@@ -7,8 +7,4 @@
 	<DefineConstants Condition="'$(IncludeNativeLibrariesForSelfExtract)'=='True'">SELF_EXTRACT</DefineConstants>
   </PropertyGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\Native.IO.Services\Native.IO.Services.csproj" />
-  </ItemGroup>
-
 </Project>
