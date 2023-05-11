@@ -5,6 +5,7 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
 	<DefineConstants Condition="'$(IncludeNativeLibrariesForSelfExtract)'=='True'">SELF_EXTRACT</DefineConstants>
+	<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
 
 </Project>
