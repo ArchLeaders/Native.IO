@@ -43,6 +43,7 @@ public unsafe partial class StringMarshal : SafeHandleZeroOrMinusOneIsInvalid
     /// <param name="encoding">The encoding to use when decoding the raw data into a managed string</param>
     public string ToString(Encoding encoding)
     {
+        GetStringHandle(handle, out _ptr, out _len);
         return encoding.GetString(_ptr, _len);
     }
 
