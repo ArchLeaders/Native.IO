@@ -49,9 +49,20 @@ public abstract class NativeLibrary<T> : INativeLibrary where T : INativeLibrary
                 ?? throw new InvalidOperationException(
                     $"The INativeLibrary '{_assemblyName}{EmbeddedPath}.{RealName}' could not be found in the assembly '{_assembly}'");
 
+            string realFilePath = Path.Combine(path, RealName);
+
+#if RELEASE
+            if (!File.Exists(realFilePath)) {
+                Directory.CreateDirectory(path);
+                using FileStream fs = File.Create(realFilePath);
+                stream.CopyTo(fs);
+            }
+#elif DEBUG
             Directory.CreateDirectory(path);
-            using FileStream fs = File.Create(Path.Combine(path, RealName));
+            using FileStream fs = File.Create(realFilePath);
             stream.CopyTo(fs);
+#endif
+
         }
         catch (IOException ex) {
             throw new COMException($"The INativeLibrary '{RealName}' failed to extract because it's already in use", ex);
