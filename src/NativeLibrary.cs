@@ -71,7 +71,7 @@ public abstract class NativeLibrary<T> : INativeLibrary where T : INativeLibrary
             throw new COMException($"The INativeLibrary '{RealName}' failed to load", ex);
         }
         finally {
-            isLoadSuccess = NativeLibrary.TryLoad(Path.Combine(path, Name), out _);
+            isLoadSuccess = NativeLibrary.TryLoad(Path.Combine(path, RealName), out _);
         }
     }
 }
