@@ -14,3 +14,6 @@ EXP bool FreeVectorHandle(std::vector<std::uint8_t>* vector);
 
 EXP void GetStringHandle(std::string* str, const char** dst, std::size_t* dst_len);
 EXP bool FreeStringHandle(std::string* str);
+
+EXP void GetExceptionHandle(std::exception* ptr, const char** dst);
+EXP void FreeExceptionHandle(std::exception* ptr);

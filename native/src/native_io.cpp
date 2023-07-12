@@ -19,3 +19,11 @@ bool FreeStringHandle(std::string* str) {
   delete str;
   return true;
 }
+
+void GetExceptionHandle(std::exception* ptr, const char** dst) {
+  *dst = ptr->what();
+}
+
+void FreeExceptionHandle(std::exception* ptr) {
+  delete ptr;
+}
