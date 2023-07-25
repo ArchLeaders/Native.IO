@@ -1,4 +1,4 @@
-﻿using Native.IO.Services;
+using Native.IO.Services;
 using System.Reflection;
 using System.Runtime.InteropServices;
 
@@ -29,7 +29,23 @@ public abstract class NativeLibrary<T> : INativeLibrary where T : INativeLibrary
     /// <summary>
     /// This works until the assembly name matches the csproj name
     /// </summary>
-    private string RealName => Name + (Environment.OSVersion.Platform == PlatformID.Win32NT ? ".dll" : ".so");
+    private string RealName => Name + GetLibraryExtension();
+
+    /// <summary>
+    /// Resolve the library extension per platform
+    /// <summary>
+    private string GetLibraryExtension()
+    {
+        if (OperatingSystem.IsWindows()) {
+            return ".dll";
+        }
+        else if (OperatingSystem.IsMacOS()) {
+            return ".dylib";
+        }
+        else  {
+            return ".so";
+        }
+    }
 
     public virtual void Load(Assembly assembly, Version version, out bool isLoadSuccess)
     {
