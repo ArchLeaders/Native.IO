@@ -34,7 +34,7 @@ public abstract class NativeLibrary<T> : INativeLibrary where T : INativeLibrary
     /// <summary>
     /// Resolve the library extension per platform
     /// <summary>
-    private string GetLibraryExtension()
+    private static string GetLibraryExtension()
     {
         if (OperatingSystem.IsWindows()) {
             return ".dll";
