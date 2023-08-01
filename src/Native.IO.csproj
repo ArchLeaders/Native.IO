@@ -11,12 +11,12 @@
   	<EmbeddedResource Include="..\native\build\native_io.dll"
 					  Link="Lib\native_io.dll"
 					  Condition="Exists('..\native\build\native_io.dll')" />
-  	<EmbeddedResource Include="..\native\build\linux\native_io.so"
+  	<EmbeddedResource Include="..\native\build\native_io.so"
 					  Link="Lib\native_io.so"
-					  Condition="Exists('..\native\build\linux\native_io.so')" />
-  	<EmbeddedResource Include="..\native\build\macos\native_io.dylib"
+					  Condition="Exists('..\native\build\native_io.so')" />
+  	<EmbeddedResource Include="..\native\build\native_io.dylib"
 					  Link="Lib\native_io.dylib"
-					  Condition="Exists('..\native\build\macos\native_io.dylib')" />
+					  Condition="Exists('..\native\build\native_io.dylib')" />
   </ItemGroup>
 
 </Project>
